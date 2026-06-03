@@ -1,0 +1,45 @@
+const map = L.map('map')
+.setView(
+[16.5062,80.6480],
+8
+);
+
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+maxZoom:19
+}
+).addTo(map);
+
+async function loadMandis(){
+
+const response =
+await fetch(
+"http://127.0.0.1:8000/api/maps/mandis"
+);
+
+const data =
+await response.json();
+
+data.forEach(mandi=>{
+
+L.marker([
+mandi.latitude,
+mandi.longitude
+])
+
+.addTo(map)
+
+.bindPopup(
+`
+<b>${mandi.mandi_name}</b>
+<br>
+${mandi.district}
+`
+);
+
+});
+
+}
+
+loadMandis();

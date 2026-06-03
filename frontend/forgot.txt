@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">Forgot Password</div>
+
+    <input
+        id="phone"
+        placeholder="Phone Number"
+    >
+
+    <div class="error" id="phoneError"></div>
+
+    <button onclick="sendResetOtp()">
+        Send OTP
+    </button>
+
+    <div class="link">
+        <a href="login.html">
+            Back to Login
+        </a>
+    </div>
+
+</div>
+
+<script src="js/auth.js"></script>
+
+<script>
+
+async function sendResetOtp(){
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    phoneError.innerText = "";
+
+    if(!validPhone(phone)){
+        phoneError.innerText =
+            "Phone number must be 10 digits";
+        return;
+    }
+
+    const response =
+        await fetch(
+            API + "/forgot-password",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({phone})
+            }
+        );
+
+    const data =
+        await response.json();
+
+    if(!data.success){
+        alert(data.message);
+        return;
+    }
+
+    sessionStorage.setItem(
+        "reset_phone",
+        phone
+    );
+
+    window.location.href =
+        "reset.html";
+}
+
+</script>
+
+</body>
+</html>

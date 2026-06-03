@@ -1,0 +1,98 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#fafafa;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:360px;
+    background:#fff;
+    border:1px solid #dbdbdb;
+    border-radius:12px;
+    padding:30px;
+    animation:fadeIn .4s ease;
+}
+
+.logo{
+    text-align:center;
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #dbdbdb;
+    border-radius:8px;
+    margin-top:10px;
+}
+
+button{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    background:#0095f6;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    opacity:.95;
+}
+
+.error{
+    color:red;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.success{
+    color:green;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.link{
+    text-align:center;
+    margin-top:15px;
+}
+
+.link a{
+    text-decoration:none;
+    color:#0095f6;
+}
+
+.password-wrapper{
+    position:relative;
+}
+
+.eye{
+    position:absolute;
+    right:12px;
+    top:22px;
+    cursor:pointer;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}

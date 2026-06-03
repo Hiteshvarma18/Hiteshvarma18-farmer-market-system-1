@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Upload CSV</h2>
+
+<input
+type="file"
+id="csv"
+>
+
+<button onclick="upload()">
+Upload
+</button>
+
+<script>
+
+async function upload(){
+
+const form =
+new FormData();
+
+form.append(
+"file",
+csv.files[0]
+);
+
+const response =
+await fetch(
+"http://127.0.0.1:8000/api/csv/upload-csv",
+{
+method:"POST",
+body:form
+}
+);
+
+const data =
+await response.json();
+
+alert(
+JSON.stringify(data)
+);
+
+}
+
+</script>
+
+</body>
+</html>

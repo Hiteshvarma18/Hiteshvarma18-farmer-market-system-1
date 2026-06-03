@@ -1,0 +1,6 @@
+date	crop	market	price
+01-01-2025	Tomato	Vijayawada	20
+02-01-2025	Tomato	Vijayawada	21
+03-01-2025	Tomato	Vijayawada	23
+01-01-2025	Onion	Guntur	28
+02-01-2025	Onion	Guntur	30

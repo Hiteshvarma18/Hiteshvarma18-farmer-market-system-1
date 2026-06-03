@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link
+rel="stylesheet"
+href="dashboard.css"
+>
+</head>
+
+<body>
+
+<div class="navbar">
+Crop Details
+</div>
+
+<div class="container">
+
+<h2 id="crop"></h2>
+
+<div id="prediction"></div>
+
+</div>
+
+<script>
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const crop =
+params.get("crop");
+
+document.getElementById(
+"crop"
+).innerText =
+crop;
+
+async function prediction(){
+
+const response =
+await fetch(
+"http://127.0.0.1:8000/api/ai/predict?days=30"
+);
+
+const data =
+await response.json();
+
+prediction.innerHTML =
+`
+<h3>
+Predicted Price
+after 30 days
+</h3>
+
+<h2>
+₹${data.predicted_price}
+</h2>
+`;
+}
+
+prediction();
+
+</script>
+
+</body>
+</html>

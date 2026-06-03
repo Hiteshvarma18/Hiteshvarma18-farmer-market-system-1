@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<div class="content">
+
+<h1>Users</h1>
+
+<table border="1">
+
+<thead>
+<tr>
+<th>ID</th>
+<th>User ID</th>
+<th>Phone</th>
+</tr>
+</thead>
+
+<tbody id="users"></tbody>
+
+</table>
+
+</div>
+
+<script>
+
+async function loadUsers(){
+
+const response =
+await fetch(
+"http://127.0.0.1:8000/api/admin/users"
+);
+
+const data =
+await response.json();
+
+let html="";
+
+data.forEach(u=>{
+
+html += `
+<tr>
+<td>${u.id}</td>
+<td>${u.user_id}</td>
+<td>${u.phone}</td>
+</tr>
+`;
+
+});
+
+users.innerHTML = html;
+}
+
+loadUsers();
+
+</script>
+
+</body>
+</html>

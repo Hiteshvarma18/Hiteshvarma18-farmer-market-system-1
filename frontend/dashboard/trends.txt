@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<div class="navbar">
+📊 Crop Price Trends
+</div>
+
+<div class="container">
+
+<select id="crop">
+    <option>Tomato</option>
+    <option>Onion</option>
+    <option>Potato</option>
+</select>
+
+<select id="market">
+    <option>Vijayawada</option>
+    <option>Guntur</option>
+    <option>Eluru</option>
+</select>
+
+<button onclick="loadChart()">Load Chart</button>
+
+<canvas id="chart"></canvas>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+let chartInstance = null;
+
+async function loadChart(){
+
+const crop = document.getElementById("crop").value;
+const market = document.getElementById("market").value;
+
+const res = await fetch(
+`http://127.0.0.1:8000/api/analytics/chart-data?crop=${crop}&market=${market}`
+);
+
+const data = await res.json();
+
+const labels = data.data.map(item => item.date);
+const prices = data.data.map(item => item.price);
+
+const ctx = document.getElementById("chart");
+
+if(chartInstance){
+    chartInstance.destroy();
+}
+
+chartInstance = new Chart(ctx, {
+    type: "line",
+    data: {
+        labels: labels,
+        datasets: [{
+            label: `${crop} Price in ${market}`,
+            data: prices,
+            borderColor: "green",
+            fill: false
+        }]
+    }
+});
+
+}
+
+loadChart();
+
+</script>
+
+</body>
+</html>

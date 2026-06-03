@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<div class="content">
+
+<h1>Crop Prices</h1>
+
+<button onclick="showAddForm()">
+Add New Crop Price
+</button>
+
+<br><br>
+
+<div id="form" style="display:none;">
+
+<input id="crop" placeholder="Crop">
+
+<input id="market" placeholder="Market">
+
+<input id="price" placeholder="Price">
+
+<input id="date" type="date">
+
+<button onclick="addCrop()">
+Save
+</button>
+
+</div>
+
+<br>
+
+<table border="1" width="100%">
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Crop</th>
+<th>Market</th>
+<th>Price</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="cropTable">
+</tbody>
+
+</table>
+
+</div>
+
+<script>
+
+const API =
+"http://127.0.0.1:8000/api/admin";
+
+function showAddForm(){
+document.getElementById(
+"form"
+).style.display="block";
+}
+
+async function loadPrices(){
+
+const response =
+await fetch(
+API + "/prices"
+);
+
+const data =
+await response.json();
+
+let html = "";
+
+data.forEach(item=>{
+
+html += `
+<tr>
+
+<td>${item.id}</td>
+
+<td>${item.crop}</td>
+
+<td>${item.market}</td>
+
+<td>${item.price}</td>
+
+<td>${item.date}</td>
+
+<td>
+
+<button
+onclick="deletePrice(${item.id})"
+>
+Delete
+</button>
+
+</td>
+
+</tr>
+`;
+
+});
+
+cropTable.innerHTML =
+html;
+}
+
+async function addCrop(){
+
+await fetch(
+API + "/add-price",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+
+crop:
+crop.value,
+
+market:
+market.value,
+
+price:
+price.value,
+
+date:
+date.value
+
+})
+}
+);
+
+loadPrices();
+
+}
+
+async function deletePrice(id){
+
+await fetch(
+API + "/delete-price/" + id,
+{
+method:"DELETE"
+}
+);
+
+loadPrices();
+
+}
+
+loadPrices();
+
+</script>
+
+</body>
+</html>

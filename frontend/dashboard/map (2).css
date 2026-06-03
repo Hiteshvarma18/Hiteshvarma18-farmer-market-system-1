@@ -1,0 +1,16 @@
+body{
+margin:0;
+font-family:Arial;
+}
+
+.navbar{
+background:#2e7d32;
+color:white;
+padding:15px;
+font-size:20px;
+}
+
+#map{
+height:90vh;
+width:100%;
+}

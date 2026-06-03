@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<div class="navbar">
+    🌾 Farmer Market Dashboard
+
+    <span style="float:right;">
+        <a href="analytics.html">Analytics</a>
+        |
+        <a href="predict.html">Prediction</a>
+        |
+        <a href="../login.html">Logout</a>
+    </span>
+</div>
+
+<div class="container">
+
+    <div class="filters">
+
+        <select id="market">
+            <option value="">
+                Select Market
+            </option>
+        </select>
+
+        <input
+            id="search"
+            placeholder="Search Crop"
+        >
+
+        <button onclick="loadPrices()">
+            Search
+        </button>
+
+    </div>
+
+    <div id="results"></div>
+
+</div>
+
+<script src="dashboard.js"></script>
+
+</body>
+</html>
