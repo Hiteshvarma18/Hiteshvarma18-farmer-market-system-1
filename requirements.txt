@@ -1,0 +1,14 @@
+Flask
+flask-cors
+flask-jwt-extended
+mysql-connector-python
+pandas
+numpy
+scikit-learn
+joblib
+gunicorn
+bcrypt
+requests
+schedule
+celery
+redis
